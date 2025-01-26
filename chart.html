@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color-Coded Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .chart-container {
+            width: 90%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Biểu đồ điểm</h1>
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        const data = [
+            { name: "Nguyễn Quang Thắng - 246", value: 600 },
+            { name: "Nguyễn Duy Phong", value: 585 },
+            { name: "Phan Thị Thu Hà", value: 577.5 },
+            { name: "Trần Quang Đạt", value: 539.3 },
+            { name: "Nguyễn Nhật Minh", value: 537.13 },
+            { name: "Nguyễn Quang Bách", value: 525.93 },
+            { name: "Ngô Tuấn Anh", value: 500.9 },
+            { name: "Nguyễn Trung Hiếu", value: 490.71 },
+            { name: "Nguyễn Thị Hương Giang", value: 490 },
+            { name: "Phan Đạt Thành", value: 476.2 },
+            { name: "Ngô Đình Tuyển", value: 469.72 },
+            { name: "Phạm Ngọc Quý", value: 466 },
+            { name: "Lê Quốc Hùng C2", value: 392.17 },
+            { name: "Đoàn Đức Công", value: 390.16 },
+            { name: "Nguyễn Quang Thắng - 247", value: 387.51 },
+            { name: "Nguyễn Thị Kiều Trang", value: 386.67 },
+            { name: "Đặng Đức Anh", value: 377.38 },
+            { name: "Phạm Đức Duy", value: 374.13 },
+            { name: "Phạm Gia Khánh", value: 360.54 },
+            { name: "Bùi Trần Quang Việt", value: 354.33 },
+            { name: "Vũ Tiến Đức", value: 344.58 },
+            { name: "Cao Minh Tuấn", value: 336.77 },
+            { name: "Lâm Hữu Hiếu", value: 328.33 },
+            { name: "Hoàng Tú", value: 319.6 },
+            { name: "Trần Hải Nam", value: 312.29 },
+            { name: "Trần Quang Minh", value: 302.57 },
+            { name: "Lưu Anh Quân", value: 287.87 },
+            { name: "Phạm Tuấn Hưng", value: 270.83 },
+            { name: "Đỗ Công Thức", value: 267.33 },
+            { name: "Nguyễn Đình Đức Anh", value: 201.77 },
+            { name: "Nguyễn Phương Huy", value: 174.9 },
+            { name: "Trần Đức Anh", value: 166.77 },
+            { name: "Nguyễn Ngọc Thắng", value: 156.77 },
+            { name: "Lù Thị Linh", value: 143.44 },
+            { name: "Nguyễn Hoàng Cường", value: 60.67 },
+            { name: "Đỗ Quang Huy", value: 30 },
+            { name: "Đỗ Huy Hoàng", value: 30 },
+            { name: "Lê Chí Dũng", value: 26.77 },
+            { name: "Nguyễn Đăng Dương C2", value: 9 },
+            { name: "Nguyễn Tài Huy Đăng", value: 0 },
+            { name: "Nguyễn Văn Dương", value: 0 },
+            { name: "Nguyễn Vương Phú", value: 0 },
+            { name: "Vũ Thành Dũng", value: 0 },
+            { name: "Ngô Thiên Phúc", value: 0 },
+            { name: "Nguyễn Mạnh Quân", value: 0 }
+        ];
+
+        const backgroundColors = data.map(item => {
+            if (item.value >= 500) return 'green';
+            if (item.value >= 400) return 'yellow';
+            if (item.value >= 300) return 'orange';
+            return 'red';
+        });
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.map(item => item.name),
+                datasets: [{
+                    label: 'Scores',
+                    data: data.map(item => item.value),
+                    backgroundColor: backgroundColors,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                },
+                scales: {
+                    x: {
+                        ticks: { autoSkip: false, maxRotation: 90, minRotation: 45 }
+                    },
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
